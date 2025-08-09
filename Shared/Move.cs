@@ -1,10 +1,23 @@
+using Shared.Entity;
 using Shared.Entity.Pieces;
 
-namespace Shared;
-
-public class Move
+namespace Shared
 {
-    private Piece piece;
-    private string fromCell;
-    private string toCell;
+    public class Move
+    {
+        private Piece Piece {get; set;}
+        private Square From {get; set;}
+        private Square To {get; set;}
+
+        public Move(Piece piece, Square from, Square to)
+        {
+            if (from.OccupyingPiece != null && !from.OccupyingPiece.Equals(piece))
+            {
+                throw new ArgumentException("Square from contains other instance of Piece than provided");
+            }
+            Piece = piece;
+            From = from;
+            To = to;
+        }
+    }    
 }
